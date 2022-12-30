@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "Id": 1481806946,
+      "Name": "Alexey ",
+      "NeedEmergencyNotify": true
+    },
+    {
+      "Id": -1001168352646,
+      "Name": "channel",
+      "NeedEmergencyNotify": true
+    },
+    {
+      "Id": -1001791391027,
+      "Name": "channel",
+      "NeedEmergencyNotify": true
+    }
+  ]
+}

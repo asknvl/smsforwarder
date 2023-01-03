@@ -87,8 +87,19 @@ namespace smsforwarder.bot
                     if (update.MyChatMember != null)
                     {
                         long id = update.MyChatMember.Chat.Id;
-                        if (update.MyChatMember.NewChatMember.Status == ChatMemberStatus.Administrator)
-                            userManager.Add(id, "channel");
+                        //if (update.MyChatMember.NewChatMember.Status == ChatMemberStatus.Administrator && update.MyChatMember.NewChatMember.Status == ChatMemberStatus.Member)
+                        //    userManager.Add(id, "channel");
+
+                        switch (update.MyChatMember.NewChatMember.Status)
+                        {
+                            case ChatMemberStatus.Administrator:
+                                userManager.Add(id, "channel");
+                                break;
+                            case ChatMemberStatus.Member:
+                                userManager.Add(id, "group");
+                                break;
+                        }
+
                     }
                     break;
 

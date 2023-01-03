@@ -19,6 +19,11 @@
       "Id": 449874445,
       "Name": "Nikolay Luzyanin",
       "NeedEmergencyNotify": true
+    },
+    {
+      "Id": -876736471,
+      "Name": "group",
+      "NeedEmergencyNotify": true
     }
   ]
 }

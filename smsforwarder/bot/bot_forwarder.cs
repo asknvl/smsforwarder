@@ -27,9 +27,9 @@ namespace smsforwarder.bot
         #region vars
 
 #if DEBUG
-        IServerApi serverApi = new ServerApi("");
+        IServerApi serverApi = new ServerApi("http://136.243.74.153:4002");
 #else
-        IServerApi serverApi = new ServerApi("");
+        IServerApi serverApi = new ServerApi("http://136.243.74.153:4002");
 #endif
 
         TelegramBotClient bot;
@@ -65,6 +65,7 @@ namespace smsforwarder.bot
                         await bot.SendTextMessageAsync(
                              chatId: user.Id,
                              text: msg,
+                             disableWebPagePreview: true,
                              cancellationToken: ct);
                     }
                     catch (Exception ex)
@@ -111,6 +112,10 @@ namespace smsforwarder.bot
                                 case "4444":
                                     userManager.Add(id, name);
                                     break;
+
+                                case "/getinfo":
+                                    await send(userManager.GetInfo(), update, cancellationToken);
+                                    break;
                             }
 
                             if (msg.Contains("notify"))
@@ -137,9 +142,35 @@ namespace smsforwarder.bot
             return Task.CompletedTask;
         }
 
-        private void SmsReadTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        bool isBuisy = false;
+        private async void SmsReadTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
+            if (isBuisy)
+                return;
 
+            isBuisy = true;
+
+            var messages = await serverApi.GetMessages();
+
+            foreach (var message in messages)
+            {
+                try
+                {
+                    string messageFrom = message.service_name;
+                    if (string.IsNullOrEmpty(messageFrom))
+                        messageFrom = message.service_phone_number;
+
+                    string text = $"{messageFrom}:\n{message.sms_text}";
+
+                    await sendAll(text, cts.Token);
+                    await serverApi.MarkMessageRead(message.id);
+                } catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            isBuisy = false;
         }
 
         #endregion
@@ -164,7 +195,7 @@ namespace smsforwarder.bot
                 cancellationToken: cts.Token);
 
             smsReadTimer = new System.Timers.Timer();
-            smsReadTimer.Interval = 1000;
+            smsReadTimer.Interval = 100;
             smsReadTimer.AutoReset = true;
             smsReadTimer.Elapsed += SmsReadTimer_Elapsed;
             smsReadTimer.Start();

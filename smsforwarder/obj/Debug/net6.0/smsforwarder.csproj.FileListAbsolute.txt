@@ -16,3 +16,10 @@ C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\obj\Debug\net6.0\ref\smsforward
 C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Telegram.Bot.dll
 C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\obj\Debug\net6.0\smsforwarder.csproj.CopyComplete
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.Http.dll
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\WORK\RaceUP\sources\smsforwarder\smsforwarder\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll

@@ -60,7 +60,7 @@ namespace smsforwarder.server
                 bool res = json["success"].ToObject<bool>();
                 if (res)
                 {
-                    var data = json["telegramUser"];
+                    var data = json["data"];
                     if (data != null)
                     {
                         messages = data.ToObject<List<smsMessageDTO>>();                       
@@ -79,6 +79,35 @@ namespace smsforwarder.server
             }
             
             return messages;
+        }
+
+        public async Task MarkMessageRead(int id)
+        {
+            var addr = $"{url}/v1/sms/{id}";
+            var httpClient = httpClientFactory.CreateClient();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            try
+            {
+                var response = await httpClient.PatchAsync(addr, null);
+                response.EnsureSuccessStatusCode();
+                var result = await response.Content.ReadAsStringAsync();
+
+                var json = JObject.Parse(result);
+                bool res = json["success"].ToObject<bool>();
+                if (res)
+                {              
+                }
+                else
+                {
+                    throw new ServerException($"success=false");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"MarkMessageRead {ex.Message}");
+            }
         }
         #endregion
     }

@@ -14,6 +14,11 @@
       "Id": -1001791391027,
       "Name": "channel",
       "NeedEmergencyNotify": true
+    },
+    {
+      "Id": 449874445,
+      "Name": "Nikolay Luzyanin",
+      "NeedEmergencyNotify": true
     }
   ]
 }
